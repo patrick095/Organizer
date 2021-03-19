@@ -1,0 +1,92 @@
+.h1Background {
+ color: white;
+ position: absolute;
+}
+.mainApp {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+}
+.card {
+    width: 200px;
+    height: 400px;
+    border-radius: 10px;
+    background-color: rgb(66, 72, 155);
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.card .cardTitle {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+.card .cardTitle input {
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    color: white;
+}
+.card .cardTitle .cardOptionsButton {
+    border: none;
+    width: 25px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    border-radius: 3px;
+    color: rgb(182, 182, 182);
+    font-size: 18px;
+}
+.card .cardTitle .cardOptionsButton:hover {
+    background-color: rgba(255, 255, 255, 0.267);
+}
+.card .cardTitle .cardOptionsButton:focus {
+    outline: 0;
+}
+.card .cardTitle .cardOptions {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    width: 100px;
+    min-height: 100px;
+    z-index: -1;
+    padding: 5px;
+}
+.card .cardTitle .active {
+    background-color: aliceblue;
+    z-index: 1;
+}
+.card .cardTitle .cardOptions button {
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    padding: 5px;
+}
+.card .cardTitle .cardOptions button:hover {
+    background-color: rgb(170, 170, 170);
+}
+.card .addItem {
+    position: absolute;
+    bottom: 10px;
+    border: none;
+    padding: 5px;
+    width: 90%;
+    border-radius: 10px;
+    background-color: rgba(240, 248, 255, 0);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+.card .addItem:hover{
+    background-color: rgba(255, 255, 255, 0.247);
+}
+.card .addItem:focus{
+    outline: 0;
+}

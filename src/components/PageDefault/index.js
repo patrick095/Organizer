@@ -7,19 +7,35 @@ import addButton from '../../assets/buttons/add.png'
 import CreateNew from './components/createNew';
 import Settings from './components/settings';
 
-function PageDefault({children}) {
-    const empityDiv = <div></div>
-const [componentToShow, setComponent ] = useState(empityDiv)
+function PageDefault(props) {
+    const empityDiv = ""
+    const [componentToShow, setComponent ] = useState(empityDiv)
+    const [option, setOption] = useState(0)
+
+    function handleComponent(component,optionSelected){
+        if (componentToShow === empityDiv) {
+            setComponent(component)
+            setOption(optionSelected)
+        }
+        else if (optionSelected !== option) {
+            setComponent(component)
+            setOption(optionSelected)
+        }
+        else {
+            setComponent(empityDiv)
+            setOption(0)
+        }
+    }
     return (
         <div className="content">
-                {children}
+                {props.children}
                 {componentToShow}
                 <Navbar>
                 <li className="button">
-                <button className="new" onClick={() => {setComponent(<CreateNew >{setComponent}</CreateNew>)}}><img src={addButton} alt="addButton" /></button>
+                <button className="new" onClick={() => {handleComponent(<CreateNew setFunc={props.setFunc} closeButton={setComponent}></CreateNew>, 1)}}><img src={addButton} alt="addButton" /></button>
                 </li>
                 <li className="button">
-                    <button className="config" onClick={() => {setComponent(<Settings >{setComponent}</Settings>)}}><img src={configButton} alt="configButton" /></button>
+                    <button className="config" onClick={() => {handleComponent(<Settings >{setComponent}</Settings>, 2)}}><img className="imgrotate" src={configButton} alt="configButton" /></button>
                 </li>
                 </Navbar>
         </div>

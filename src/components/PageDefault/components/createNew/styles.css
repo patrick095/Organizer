@@ -1,14 +1,15 @@
 .newCard {
     width: 400px;
     height: 400px;
-    background-color: rgb(185, 185, 185);
+    background-color: rgb(241, 241, 241);
     border-radius: 20px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: absolute;
+    z-index: 999;
 }
 .closeButton {
     background-color: rgb(235, 74, 74);
@@ -18,11 +19,17 @@
     width: 20px;
     height: 20px;
     border: none;
-    border-radius: 10px;
+    border-radius: 50%;
     cursor: pointer;
     color: white;
     padding: 0;
+    font-size: 17px;
 }
 .closeButton:focus {
     outline:0;
+}
+.newCard form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

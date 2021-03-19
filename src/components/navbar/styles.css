@@ -9,15 +9,18 @@
     align-items: center;
     overflow: visible;
     height: 55px;
+    z-index: 999;
 }
 .navbar .buttons {
     display: flex;
     flex-direction: row;
     list-style-type: none;
-    border: 2px solid rgb(165, 163, 163);
+    border: 1px solid rgba(255, 255, 255, 0.342);
     border-radius: 10px;
     height: 65px;
     padding: 0 10px;
+    background-color: rgba(236, 236, 236, 0.404);
+    backdrop-filter: blur(5px);
 }
 .navbar .buttons .button {
     position: relative;
@@ -50,11 +53,12 @@
 }
 .navbar .button button img {
     width: 100%;
+}
+.navbar .button button .imgrotate {
     transform: rotate(0deg);
     transition: 1s;
 }
-.navbar .button button img:hover{
-    width: 100%;
+.navbar .button button .imgrotate:hover{
     transform: rotate(180deg);
     transition: 1s;
 }
