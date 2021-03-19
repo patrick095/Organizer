@@ -1,0 +1,28 @@
+.newCard {
+    width: 400px;
+    height: 400px;
+    background-color: rgb(185, 185, 185);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.closeButton {
+    background-color: rgb(235, 74, 74);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    padding: 0;
+}
+.closeButton:focus {
+    outline:0;
+}
