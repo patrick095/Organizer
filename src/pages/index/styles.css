@@ -1,9 +1,8 @@
 * {
     --primary-item-bg-color: rgb(66, 102, 185);
     --primary-item-font-color: white;
-}
-input {
-  outline: 0;
+    transition: 0.5s;
+    outline: 0;
 }
 .h1Background {
  color: white;
@@ -49,6 +48,7 @@ input {
     border-radius: 3px;
     color: rgb(182, 182, 182);
     font-size: 18px;
+    position: relative;
 }
 .cardOptionsButton:hover {
     background-color: rgba(255, 255, 255, 0.267);
@@ -58,17 +58,22 @@ input {
 }
 .cardOptions {
     position: absolute;
-    right: 0;
+    width: 0;
+    height: 0;
+    right: 32px;
     top: 20px;
-    width: 100px;
-    min-height: 100px;
     z-index: -1;
     padding: 5px;
     border-radius: 10px;
+    opacity: 0;
 }
 .active {
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
     z-index: 1;
+    width: 100px;
+    height: 100px;
+    opacity: 1;
+    right: 0;
 }
 .cardOptions button {
     border: none;
