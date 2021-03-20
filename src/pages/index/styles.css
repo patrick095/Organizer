@@ -208,10 +208,12 @@ margin: 2px;
       color: var(--primary-item-font-color);
   }
   .calendar input {
+    width: 90%;
     border: none;
     background-color: rgba(255, 255, 255, 0);
     color: var(--primary-item-font-color);
-    text-align: center;
+    text-align: left;
+    padding-left: 10px;
   }
   .calendar abbr {
       text-decoration: none;

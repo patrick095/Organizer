@@ -10,7 +10,11 @@ function CreateNew(props) {
 
     useEffect(()=>{
         setNewItem({...newItem,type: select})
-        if (select === "card") {
+        
+        if (select === "Selecione um tipo") {
+            setOptions(<div></div>)
+        }
+        else {
             setOptions(
                 <input type="text" placeholder="Nome" onChange={(e)=> setNewItem({...newItem, title: e.target.value})} />
             )
@@ -38,8 +42,8 @@ function CreateNew(props) {
                 </optgroup>
             </select>
             {options}
-            </form>
             <button onClick={()=> saveNewItem()}>Criar</button>
+            </form>
         </div>
     )
 }

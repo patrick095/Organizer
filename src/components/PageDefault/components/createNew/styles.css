@@ -1,12 +1,11 @@
 .newCard {
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
     background-color: rgb(241, 241, 241);
     border-radius: 20px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     position: absolute;
     z-index: 999;
@@ -29,7 +28,39 @@
     outline:0;
 }
 .newCard form {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+}
+.newCard form input, select{
+    width: 160px;
+    height: 25px;
+    margin-top: 10px;
+    border: none;
+    background-color: rgb(194, 202, 209);
+    border-radius: 5px;
+    text-align: center;
+}
+.newCard form input:hover, select:hover {
+    background-color: rgb(134, 162, 187);
+    color: rgb(255, 255, 255);
+}
+.newCard form input:hover::placeholder {
+    color: rgb(226, 225, 225);
+}
+::placeholder {
+    color: rgb(155, 153, 153);
+}
+.newCard form button {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(194, 202, 209);
+    cursor: pointer;
+}
+.newCard button:hover {
+    background-color: rgb(134, 162, 187);
 }

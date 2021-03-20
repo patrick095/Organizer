@@ -162,7 +162,9 @@ function Index() {
     //FUNÇÕES CARD
     function removeCard(index){
         allObjects.splice(index, 1)
+        buttonOption[index] = ""
         setAllObjects([...allObjects])
+        setButtonOption([...buttonOption])
     }
     function changeTitle(index, title){
        allObjects[index].title = title
