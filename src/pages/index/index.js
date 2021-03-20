@@ -8,16 +8,21 @@ function Index() {
     const [allObjects, setAllObjects] = useState([{type: "card",title: "Novo Card", body: [{title:"Novo Item", body:"Aqui um pequeno texto do corpo do item"}]}])
     const [buttonOption, setButtonOption] = useState([])
     const [subItemActive,setSubItemActive ] = useState([[]])
+    //use Effect cria todas as opções dos botões de acordo com o que está em allObjects
     useEffect(() =>{
-        let array = []
         allObjects.map((obj,i) =>{
-            array.push([])
+            subItemActive.push([])
+            buttonOption.push('')
             obj.body.map(()=>{
-                array[i].push('')
+                subItemActive[i].push('')
+                return subItemActive
             })
+            return subItemActive
         })
-        setSubItemActive(array)
+        setSubItemActive([...subItemActive])
+        setButtonOption([...buttonOption])
     }, [allObjects])
+
     //modelos de objetos
     function objectCard(obj, i){
         function buttonSubItem(index){
@@ -53,60 +58,50 @@ function Index() {
             setAllObjects(allObjects.splice(index1, 1, changeItem))
         }
         return (
-    <div className="card" key={"card"+obj.title}>
-    <div className="cardTitle">
-    <input type="text" value={obj.title} onChange={(e) => changeTitle(i, e.target.value)}/>
-    <button onClick={() => handlebuttonOption(i)} className="cardOptionsButton">...</button>
-    <div className={'cardOptions '+ buttonOption[i]}>
-            <button onClick={()=> removeCard(i)}>Apagar</button>
-    </div>
-    </div>
-    <div className="cardBody">{
-    obj.body.map((subObj, ii) =>{
-        return (
-            <div className="subItem" key={subObj.title+" - "+ii}>
-                <div>
-                <input type="text" value={subObj.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
-                <button onClick={() => buttonSubItem(ii)}><img src={editButton} alt="editButton" className='editButton' /></button>
-                <button className="deleteButton" onClick={()=>deleteSubItem(i,ii)}> x </button>
+            <div className="card" key={"card"+i}>
+                <div className="cardTitle">
+                <input type="text" value={obj.title} onChange={(e) => changeTitle(i, e.target.value)}/>
+                <button onClick={() => handlebuttonOption(i)} className="cardOptionsButton">...</button>
+                <div className={'cardOptions '+ buttonOption[i]}>
+                        <button onClick={()=> removeCard(i)}>Apagar</button>
                 </div>
-                <div className={'subItemBody '+subItemActive[i][ii]}>
-                    <textarea className={subItemActive[i][ii]} value={subObj.body} onChange={(e)=>{handleChangeSubText(e,i,ii)}}/>
                 </div>
+                <div className="cardBody">{
+                    obj.body.map((subObj, ii) =>{
+                        return (
+                            <div className="subItem" key={" - "+ii}>
+                                <div>
+                                    <input type="text" value={subObj.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
+                                    <button onClick={() => buttonSubItem(ii)}><img src={editButton} alt="editButton" className='editButton' /></button>
+                                    <button className="deleteButton" onClick={()=>deleteSubItem(i,ii)}> x </button>
+                                </div>
+                                <div className={'subItemBody '+subItemActive[i][ii]}>
+                                    <textarea className={subItemActive[i][ii]} value={subObj.body} onChange={(e)=>{handleChangeSubText(e,i,ii)}}/>
+                                </div>
+                            </div>
+                            )
+                        })
+                    }
+                </div>
+                <button className="addItem" onClick={() => addSubItem(i)}>+ Adicionar item</button>
             </div>
-        )
-    })
-    }</div>
-    <button className="addItem" onClick={() => addSubItem(i)}>+ Adicionar item</button>
-</div>
-)}
-    useEffect(()=>{
-        let allOptions = []
-        allObjects.map(card =>{
-            allOptions.push('')
-        })
-        setButtonOption(allOptions)
-    },[allObjects])
+        )}
     function removeCard(index){
         allObjects.splice(index, 1)
         setAllObjects([...allObjects])
     }
     function changeTitle(index, title){
-       let cardChanged = allObjects[index]
-        cardChanged.title = title
-        allObjects.splice(index, 1, cardChanged)
+       allObjects[index].title = title
         setAllObjects([...allObjects])
     }
     function handlebuttonOption(index){
         if (buttonOption[index] === '') {
-            let newButtonOptions = buttonOption
-            newButtonOptions[index] = "active"
-            setButtonOption([...newButtonOptions])
+            buttonOption[index] = "active"
+            setButtonOption([...buttonOption])
         }
         else {
-            let newButtonOptions = buttonOption
-            newButtonOptions[index] = ""
-            setButtonOption([...newButtonOptions])
+            buttonOption[index] = ""
+            setButtonOption([...buttonOption])
         }
     }
     return (
@@ -123,7 +118,7 @@ function Index() {
                             o = objectCard(obj, i)
                         }
                         return (
-                            <div key={"object"+obj.title+i}>
+                            <div key={"object"+i}>
                             {o}
                             </div>
                         )
