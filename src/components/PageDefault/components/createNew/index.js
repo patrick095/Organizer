@@ -5,10 +5,11 @@ import "./styles.css"
 function CreateNew(props) {
     const [options, setOptions] = useState('')
     const [select, setSelect] = useState('')
-    const [newItem, setNewItem] = useState({})
-    const [dataFunc, setFunc] = props.setFunc
+    const [newItem, setNewItem] = useState({title: "", type:'', body:[]})
+    const [dataFunc, setAllObjects] = props.setFunc
 
     useEffect(()=>{
+        setNewItem({...newItem,type: select})
         if (select === "card") {
             setOptions(
                 <input type="text" placeholder="Nome" onChange={(e)=> setNewItem({...newItem, title: e.target.value})} />
@@ -16,7 +17,7 @@ function CreateNew(props) {
         }
     }, [select])
     function saveNewItem(){
-        setFunc([...dataFunc,newItem])
+        setAllObjects([...dataFunc,newItem])
         props.closeButton("")
     }
 
@@ -29,11 +30,11 @@ function CreateNew(props) {
             <select onChange={(e) => setSelect(e.target.value)}>
                 <option>Selecione um tipo</option>
                 <option value="card">Card</option>
-                <option>Lista</option>
-                <option>Tabela</option>
+                <option value="list">Lista</option>
+                <option value="table">Tabela</option>
                 <optgroup label="Calendário">
-                    <option>Semanal</option>
-                    <option>Mensal</option>
+                    <option value="calendarS">Semanal</option>
+                    <option value="calendarM">Mensal</option>
                 </optgroup>
             </select>
             {options}
