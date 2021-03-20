@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import Calendar from 'react-calendar';
+
 import PageDefault from '../../components/PageDefault';
 import editButton from '../../assets/buttons/edit.png';
 
 import "./styles.css"
 
 function Index() {
-    const [allObjects, setAllObjects] = useState([{type: "card",title: "Novo Card", body: [{title:"Novo Item", body:"Aqui um pequeno texto do corpo do item"}]}])
+    const [allObjects, setAllObjects] = useState([
+        {type: "card",title: "Novo Card", body: [{title:"Novo Item", body:"Aqui um pequeno texto do corpo do item"}]},
+        {type: "calendarM", title: "Meu novo Calendário", body: []}
+    ])
     const [buttonOption, setButtonOption] = useState([])
     const [subItemActive,setSubItemActive ] = useState([[]])
+    const [valueCalendar, onChangeCalendar] = useState(new Date());
     //use Effect cria todas as opções dos botões de acordo com o que está em allObjects
     useEffect(() =>{
         allObjects.map((obj,i) =>{
@@ -24,6 +30,7 @@ function Index() {
     }, [allObjects])
 
     //modelos de objetos
+    //CARD
     function objectCard(obj, i){
         function buttonSubItem(index){
             if (subItemActive[i][index] === '') {
@@ -86,6 +93,39 @@ function Index() {
                 <button className="addItem" onClick={() => addSubItem(i)}>+ Adicionar item</button>
             </div>
         )}
+
+    //CALENDÁRIO
+    function objectCalendar(obj, index){
+    //console.log(valueCalendar)
+    let bodyToShow
+    if (obj.body.length < 1) {
+        bodyToShow = (<span>Nada para hoje</span>)
+    }
+    ///fazer aqui como vão ser salvos os itens no calendário
+        return (
+            <div className="calendar">
+                <div className="calendarHeader">
+                <input type="text" value={obj.title} onChange={(e)=>changeTitle(index, e.target.value)}/>
+                <button onClick={() => handlebuttonOption(index)} className="cardOptionsButton">...</button>
+                <div className={'cardOptions '+ buttonOption[index]}>
+                        <button onClick={()=> removeCard(index)}>Apagar</button>
+                </div>
+                </div>
+            <Calendar
+                onChange={onChangeCalendar}
+                value={valueCalendar}
+                //formatLongDate={( 'dd MMM YYYY')}
+            />
+            <div className="dayItem">
+                {bodyToShow}
+                </div>
+            <div className="buttonAdd">
+                <button >+ Adicionar Item</button>
+            </div>
+            </div>
+        )
+    }
+    //FUNÇÕES CARD
     function removeCard(index){
         allObjects.splice(index, 1)
         setAllObjects([...allObjects])
@@ -114,6 +154,9 @@ function Index() {
                             o = objectCard(obj, i)
                         }
                         //por enquanto vou deixar assim para evitar erro
+                        else if (obj.type === "calendarM") {
+                            o = objectCalendar(obj, i)
+                        }
                         else {
                             o = objectCard(obj, i)
                         }
