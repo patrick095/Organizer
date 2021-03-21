@@ -40,7 +40,7 @@ function CalendarM(props){
         setAllObjects([...allObjects])
         setButtonOption([...buttonOption])
     }
-    function changeTitle(index, title){
+    function changeTitle(title){
         obj.title = title
         setAllObjects([...allObjects])
     }
@@ -66,7 +66,7 @@ function CalendarM(props){
         return (
             <div className="calendar">
                 <div className="calendarHeader">
-                <input type="text" value={obj.title} onChange={(e)=>changeTitle(index, e.target.value)}/>
+                <input type="text" value={obj.title} onChange={(e)=>changeTitle(e.target.value)}/>
                 <button onClick={() => handlebuttonOption(index)} className="cardOptionsButton">...</button>
                 <div className={'cardOptions '+ buttonOption[index]}>
                         <button onClick={()=> removeCard(index)}>Apagar</button>
@@ -81,7 +81,7 @@ function CalendarM(props){
                 {bodyToShow || <div className="dayItem" key="Nada"><span>Nada salvo hoje</span></div>}
                 </div>
             <div className="buttonAdd">
-                <button className="addItem" onClick={() => addSubItemCalendar(index,valueCalendar)}>+ Adicionar Item</button>
+                <button className="addItem" onClick={() => addSubItemCalendar(valueCalendar)}>+ Adicionar Item</button>
             </div>
             </div>
         )
