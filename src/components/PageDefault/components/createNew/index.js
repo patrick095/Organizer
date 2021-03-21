@@ -35,10 +35,10 @@ function CreateNew(props) {
                 <option>Selecione um tipo</option>
                 <option value="card">Card</option>
                 <option value="list">Lista</option>
-                <option value="table">Tabela</option>
+                <option value="table" disabled>Tabela</option>
                 <optgroup label="Calendário">
-                    <option value="calendarS">Semanal</option>
                     <option value="calendarM">Mensal</option>
+                    <option value="calendarS" disabled>Semanal</option>
                 </optgroup>
             </select>
             {options}
