@@ -17,11 +17,12 @@ function CreateNew(props) {
         }
         else {
             setOptions(
-                <input type="text" placeholder="Título" onChange={(e)=> setNewItem({...newItem, title: e.target.value})} />
+                <input type="text" placeholder="Título" onChange={(e)=> setNewItem({...newItem, type: select, title: e.target.value})} />
                 )
                 setButtonDisabled(false)
             }
     }, [select])
+    
     function saveNewItem(){
         setAllObjects([...dataFunc,newItem])
         props.closeButton("")
