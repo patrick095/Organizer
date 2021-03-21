@@ -41,7 +41,7 @@ function CalendarM(props){
     function addSubItemCalendar(date){
         let shortDate = date.toISOString().slice(0, 10)
         obj.body.push({title:'', date: shortDate})
-        setAllObjects([...allObjects])
+        setObj({...obj})
     }
     function removeCard(index){
         allObjects.splice(index, 1)
@@ -65,7 +65,7 @@ function CalendarM(props){
     }
     function deleteSubItem(index2){
         obj.body.splice(index2, 1)
-        setAllObjects([...allObjects])
+        setObj({...obj})
     }
     function handleChangeSubTitle(e, index2){
         obj.body[index2].title = e.target.value
