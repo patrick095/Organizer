@@ -2,6 +2,7 @@
     --primary-item-bg-color: rgb(66, 102, 185);
     --primary-item-font-color: white;
     outline: 0;
+    transition: 0.5s;
 }
 .h1Background {
  color: white;
@@ -84,7 +85,7 @@
 .cardOptions button:hover {
     background-color: rgb(170, 170, 170);
 }
-.card .addItem {
+.addItem {
     position: absolute;
     bottom: 10px;
     border: none;
@@ -96,7 +97,7 @@
     font-size: 16px;
     cursor: pointer;
 }
-.card .addItem:hover{
+.addItem:hover{
     background-color: rgba(255, 255, 255, 0.247);
 }
 .card .addItem:focus{
@@ -220,7 +221,6 @@ margin: 2px;
   .buttonAdd button {
       position: absolute;
       bottom: 10px;
-      left: 36%;
     display: flex;
     border: none;
     cursor: pointer;
@@ -229,6 +229,8 @@ margin: 2px;
     border-radius: 10px;
     color: var(--primary-item-font-color);
     font-size: 16px;
+    width: 95%;
+    justify-content: center;
   }
   .buttonAdd button:hover {
     background-color: rgba(255, 255, 255, 0.267);
@@ -237,6 +239,7 @@ margin: 2px;
     margin-left: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     overflow: auto;
     max-height: 57px;
     background-color: rgba(0, 0, 0, 0.055);

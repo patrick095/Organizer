@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import Calendar from 'react-calendar';
 
 function CalendarM(props){
-    const {obj, index, receivedAllObjects, setAllObjects} = props
+    const {obj, index, receivedAllObjects, setAllObjects2} = props
 
-    const [allObjects, setAllObjects2] = useState(receivedAllObjects)
+    const [allObjects, setAllObjects] = useState(receivedAllObjects)
     const [buttonOption, setButtonOption] = useState([""])
     const [valueCalendar, onChangeCalendar] = useState(new Date());
     let bodyToShow = false
@@ -37,7 +37,7 @@ function CalendarM(props){
     function removeCard(index){
         allObjects.splice(index, 1)
         buttonOption[index] = ""
-        setAllObjects([...allObjects])
+        setAllObjects2([...allObjects])
         setButtonOption([...buttonOption])
     }
     function changeTitle(title){

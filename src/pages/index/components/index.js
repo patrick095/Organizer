@@ -44,7 +44,7 @@ function DraggableDiv(props) {
                     obj={quote}
                     i={index}
                     receivedAllObjects={props.allObjects}
-                    setAllObjects={props.setAllObjects}
+                    setAllObjects2={props.setAllObjects}
                     />
                 </QuoteItem>)
             }
@@ -59,7 +59,7 @@ function DraggableDiv(props) {
                     obj={quote}
                     index={index}
                     receivedAllObjects={props.allObjects}
-                    setAllObjects={props.setAllObjects}
+                    setAllObjects2={props.setAllObjects}
                     />
                 </QuoteItem>)
             }
@@ -74,7 +74,7 @@ function DraggableDiv(props) {
                     obj={quote}
                     i={index}
                     receivedAllObjects={props.allObjects}
-                    setAllObjects={props.setAllObjects}
+                    setAllObjects2={props.setAllObjects}
                     />
                 </QuoteItem>)
             }
@@ -88,6 +88,7 @@ function DraggableDiv(props) {
                     obj={quote}
                     i={index}
                     receivedAllObjects={props.allObjects}
+                    setAllObjects2={props.setAllObjects}
                     />
                 </QuoteItem>)
             }
@@ -100,7 +101,7 @@ function DraggableDiv(props) {
       }
       
       const QuoteList = React.memo(function QuoteList({ quotes }) {
-        return quotes.map((quote: QuoteType, index: number) => (
+        return quotes.map((quote, index) => (
           <Quote quote={quote} index={index} key={quote.id} />
         ));
       });

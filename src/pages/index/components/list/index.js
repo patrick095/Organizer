@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 
 
 function List(props){
-    const {obj, i, receivedAllObjects, setAllObjects} = props
-    const [allObjects, setAllObjects2] = useState(receivedAllObjects)
+    const {obj, i, receivedAllObjects, setAllObjects2} = props
+    const [allObjects, setAllObjects] = useState(receivedAllObjects)
     const [buttonOption, setButtonOption] = useState([])
 
     function removeCard(index){
         allObjects.splice(index, 1)
         buttonOption[index] = ""
-        setAllObjects([...allObjects])
+        setAllObjects2([...allObjects])
         setButtonOption([...buttonOption])
     }
     function changeTitle(index, title){
