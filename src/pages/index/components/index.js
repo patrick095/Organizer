@@ -8,11 +8,11 @@ import CalendarM from './calendarM';
 import List from './list';
 
 function DraggableDiv(props) {
-    // -------------------
-      const [state, setState] = useState({ quotes: props.allObjects });
+    const [allObjects, setAllObjects] = props.children
+      const [state, setState] = useState({ quotes: allObjects });
       useEffect(()=>{
-        setState({ quotes: props.allObjects })
-      },[props.allObjects])
+        setState({ quotes: allObjects })
+      },[allObjects])
       
       const grid = 8;
       const reorder = (list, startIndex, endIndex) => {
@@ -30,79 +30,66 @@ function DraggableDiv(props) {
         margin: 10px;
         margin-bottom: ${grid}px;
       `;
+      //Verifica o tipo de Item
+      function typeToShow(quote, index){
+        if (quote.type === "card") {
+            return (
+                <Card 
+                obj2={quote}
+                i={index}
+                allObjects={allObjects}
+                setAllObjects={setAllObjects}
+                />)
+        }
+        else if (quote.type === "calendarM") {
+            return (
+                <CalendarM
+                obj2={quote}
+                index={index}
+                allObjects={allObjects}
+                setAllObjects={setAllObjects}
+                />)
+        }
+        else if (quote.type === "list") {
+            return (
+                <List
+                obj2={quote}
+                i={index}
+                allObjects={allObjects}
+                setAllObjects={setAllObjects}
+                />)
+        }
+        else {
+            return (
+                <Card 
+                obj={quote}
+                i={index}
+                receivedAllObjects={allObjects}
+                setAllObjects2={setAllObjects}
+                />)
+        }
+      } 
       
       function Quote({ quote, index }) {
-        function typeToShow(provided){
-            if (quote.type === "card") {
-                return (<QuoteItem
+        return (
+          <Draggable draggableId={"id"+index} index={index}>
+            {provided => (
+            <QuoteItem
                     key={"card"+index}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <Card 
-                    obj={quote}
-                    i={index}
-                    receivedAllObjects={props.allObjects}
-                    setAllObjects2={props.setAllObjects}
-                    />
-                </QuoteItem>)
-            }
-            else if (quote.type === "calendarM") {
-                return (<QuoteItem
-                  key={"calendarM"+index}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                >
-                    <CalendarM
-                    obj={quote}
-                    index={index}
-                    receivedAllObjects={props.allObjects}
-                    setAllObjects2={props.setAllObjects}
-                    />
-                </QuoteItem>)
-            }
-            else if (quote.type === "list") {
-                return (<QuoteItem
-                  key={"list"+index}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                >
-                    <List
-                    obj={quote}
-                    i={index}
-                    receivedAllObjects={props.allObjects}
-                    setAllObjects2={props.setAllObjects}
-                    />
-                </QuoteItem>)
-            }
-            else {
-                return (<QuoteItem
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                >
-                    <Card 
-                    obj={quote}
-                    i={index}
-                    receivedAllObjects={props.allObjects}
-                    setAllObjects2={props.setAllObjects}
-                    />
-                </QuoteItem>)
-            }
-        } 
-        return (
-          <Draggable draggableId={quote.id} index={index}>
-            {provided => typeToShow(provided)}
+              {typeToShow(quote, index)}
+              </QuoteItem>
+              )}
           </Draggable>
         );
       }
       
       const QuoteList = React.memo(function QuoteList({ quotes }) {
         return quotes.map((quote, index) => (
-          <Quote quote={quote} index={index} key={quote.id} />
+          <Quote quote={quote} index={index} key={"id"+index} />
         ));
       });
       
@@ -124,8 +111,6 @@ function DraggableDiv(props) {
           setState({ quotes });
         }
 
-
-    // ----------------
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="list" direction="horizontal" style={{display:"flex"}}>

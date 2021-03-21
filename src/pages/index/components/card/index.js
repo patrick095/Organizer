@@ -1,25 +1,40 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import editButton from '../../../../assets/buttons/edit.png';
 
  function Card(props){
-     const {obj, i, receivedAllObjects, setAllObjects2} = props
-    const [allObjects, setAllObjects] = useState(receivedAllObjects)
-    const [buttonOption, setButtonOption] = useState(defaultButtonOptionsValue(receivedAllObjects))
-    const [subItemActive,setSubItemActive ] = useState(defaultSubItemValue()) 
+     const {obj2, i, allObjects, setAllObjects} = props
+     const [obj, setObj] = useState(obj2)
+    const [buttonOption, setButtonOption] = useState(defaultButtonOptionsValue(allObjects))
+    const [subItemActive,setSubItemActive ] = useState(defaultSubItemValue())
 
     function defaultSubItemValue(){
         let array = []
         allObjects.map((obj, i) =>{
             array.push([])
             obj.body.map((o) =>{
-                array[i].push([])
+                array[i].push('')
                 return array
             })
             return array
         })
         return array
     }    
+
+    //mantém a opção dos botôes sempre atualizadas ao criar ou apagar itens
+    function updateSubItemActive(){
+        let array = []
+        allObjects.map((obj, i) =>{
+            array.push([])
+            obj.body.map((o) =>{
+                array[i].push('')
+                return array
+            })
+            return array
+        })
+        setSubItemActive(array)
+    }
+
     function defaultButtonOptionsValue(array){
         let newArray = []
         array.map(()=>{
@@ -31,13 +46,15 @@ import editButton from '../../../../assets/buttons/edit.png';
     function removeCard(index){
         allObjects.splice(index, 1)
         buttonOption[index] = ""
-        setAllObjects2([...allObjects])
+        setAllObjects([...allObjects])
         setButtonOption([...buttonOption])
     }
+
     function changeTitle(index, title){
-       allObjects[index].title = title
-        setAllObjects([...allObjects])
+        obj.title = title
+        setObj({...obj})
     }
+
     function handlebuttonOption(index){
         if (buttonOption[index] === '') {
             buttonOption[index] = "active"
@@ -48,6 +65,7 @@ import editButton from '../../../../assets/buttons/edit.png';
             setButtonOption([...buttonOption])
         }
     }
+
     function buttonSubItem(index1, index2){
         if (subItemActive[index1][index2] === '') {
             subItemActive[index1][index2] = "active"
@@ -58,26 +76,33 @@ import editButton from '../../../../assets/buttons/edit.png';
             setSubItemActive([...subItemActive])
         }
     }
+
     function deleteSubItem(index1, index2){
         obj.body.splice(index2, 1)
-        setAllObjects([...allObjects])
+        setObj({...obj})
+        updateSubItemActive()
     }
+
     function addSubItem(index1){
-        obj.body.push({title:'novo item', body:''})
-        setAllObjects([...allObjects])
+        obj.body.push({title:'', body:''})
+        setObj({...obj})
+        updateSubItemActive()
     }
+
     function handleChangeSubTitle(e, index1, index2){
         obj.body[index2].title = e.target.value
-        setAllObjects([...allObjects])
+        setObj({...obj})
     }
+
     function handleChangeSubText(e, index1, index2){
         obj.body[index2].body = e.target.value
-        setAllObjects([...allObjects])
+        setObj({...obj})
     }
+
     return (
         <div className="card" key={"card"+i}>
             <div className="cardTitle">
-            <input type="text" value={obj.title} onChange={(e) => changeTitle(i, e.target.value)}/>
+            <input type="text" value={obj.title} placeholder="Título"  onChange={(e) => changeTitle(i, e.target.value)}/>
             <button onClick={() => handlebuttonOption(i)} className="cardOptionsButton">...</button>
             <div className={'cardOptions '+ buttonOption[i]}>
                     <button onClick={()=> removeCard(i)}>Apagar</button>
@@ -88,7 +113,7 @@ import editButton from '../../../../assets/buttons/edit.png';
                     return (
                         <div className="subItem" key={" - "+ii}>
                             <div>
-                                <input type="text" value={subObj.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
+                                <input type="text" placeholder="Novo Item"  value={subObj.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
                                 <button onClick={() => buttonSubItem(i,ii)}><img src={editButton} alt="editButton" className='editButton' /></button>
                                 <button className="deleteButton" onClick={()=>deleteSubItem(i,ii)}> x </button>
                             </div>

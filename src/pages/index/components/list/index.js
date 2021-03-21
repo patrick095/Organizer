@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 
 
 function List(props){
-    const {obj, i, receivedAllObjects, setAllObjects2} = props
-    const [allObjects, setAllObjects] = useState(receivedAllObjects)
-    const [buttonOption, setButtonOption] = useState(defaultButtonOptionsValue(receivedAllObjects))
+    const {obj2, i, allObjects, setAllObjects} = props
+     const [obj, setObj] = useState(obj2)
+    const [buttonOption, setButtonOption] = useState(defaultButtonOptionsValue(allObjects))
 
     function defaultButtonOptionsValue(array){
         let newArray = []
@@ -17,12 +17,12 @@ function List(props){
     function removeCard(index){
         allObjects.splice(index, 1)
         buttonOption[index] = ""
-        setAllObjects2([...allObjects])
+        setAllObjects([...allObjects])
         setButtonOption([...buttonOption])
     }
     function changeTitle(index, title){
         obj.title = title
-        setAllObjects([...allObjects])
+        setObj({...obj})
     }
     function handlebuttonOption(index){
         if (buttonOption[index] === '') {
@@ -36,25 +36,25 @@ function List(props){
     }
     function handleCheckBox(index1, index2){
             obj.body[index2].checked = !obj.body[index2].checked
-            setAllObjects([...allObjects])
+            setObj({...obj})
         
     }
     function deleteSubItem(index1, index2){
         obj.body.splice(index2, 1)
-        setAllObjects([...allObjects])
+        setObj({...obj})
     }
     function addSubItem(index1){
-        obj.body.push({title:'novo item', body:''})
-        setAllObjects([...allObjects])
+        obj.body.push({title:'', body:''})
+        setObj({...obj})
     }
     function handleChangeSubTitle(e, index1, index2){
         obj.body[index2].title = e.target.value
-        setAllObjects([...allObjects])
+        setObj({...obj})
     }
     return (
         <div className="card" key={"list"+i}>
             <div className="cardTitle">
-            <input type="text" value={obj.title} onChange={(e) => changeTitle(i, e.target.value)}/>
+            <input type="text" value={obj.title} placeholder="Título"  onChange={(e) => changeTitle(i, e.target.value)}/>
             <button onClick={() => handlebuttonOption(i)} className="cardOptionsButton">...</button>
             <div className={'cardOptions '+ buttonOption[i]}>
                     <button onClick={()=> removeCard(i)}>Apagar</button>
@@ -66,7 +66,7 @@ function List(props){
                         obj.body.map((objList, ii) =>{
                             return (
                                 <li className="listItem" key={" - "+ii}>
-                                        <input type="text" value={objList.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
+                                        <input type="text" placeholder="Novo Item" value={objList.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
                                         <input type="checkbox" checked={objList.checked} onChange={() => handleCheckBox(i,ii)} />
                                         <button className="deleteButton" onClick={()=>deleteSubItem(i,ii)}> x </button>
                                 </li>

@@ -5,20 +5,22 @@ import "./styles.css"
 function CreateNew(props) {
     const [options, setOptions] = useState('')
     const [select, setSelect] = useState('')
-    const [newItem, setNewItem] = useState({id:"",title: "", type:'', body:[]})
     const [dataFunc, setAllObjects] = props.setFunc
-
+    const [newItem, setNewItem] = useState({id:"",title: "", type:select, body:[]})
+    const [buttonDisabled, setButtonDisabled] = useState(false)
+    
     useEffect(()=>{
         setNewItem({...newItem,type: select, id: Math.random().toString()})
-        console.log(select)
         if (select === "Selecione um tipo" || select === "") {
             setOptions(<div></div>)
+            setButtonDisabled(true)
         }
         else {
             setOptions(
-                <input type="text" placeholder="Nome" onChange={(e)=> setNewItem({...newItem, title: e.target.value})} />
-            )
-        }
+                <input type="text" placeholder="Título" onChange={(e)=> setNewItem({...newItem, title: e.target.value})} />
+                )
+                setButtonDisabled(false)
+            }
     }, [select])
     function saveNewItem(){
         setAllObjects([...dataFunc,newItem])
@@ -35,14 +37,14 @@ function CreateNew(props) {
                 <option>Selecione um tipo</option>
                 <option value="card">Card</option>
                 <option value="list">Lista</option>
-                <option value="table" disabled>Tabela</option>
+                {/* <option value="table" disabled>Tabela</option> */}
                 <optgroup label="Calendário">
                     <option value="calendarM">Mensal</option>
-                    <option value="calendarS" disabled>Semanal</option>
+                    {/* <option value="calendarS" disabled>Semanal</option> */}
                 </optgroup>
             </select>
             {options}
-            <button onClick={()=> saveNewItem()}>Criar</button>
+            <button onClick={()=> saveNewItem()} disabled={buttonDisabled}>Criar</button>
             </form>
         </div>
     )

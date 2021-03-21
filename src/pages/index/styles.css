@@ -121,6 +121,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 margin: 2px;
+position: relative;
 }
 .editButton {
     width: 10px;
@@ -171,15 +172,25 @@ margin: 2px;
     z-index: -999;
 }
 .card .cardBody .subItem .subItemBody textarea{
+    max-height: 115px;
+    resize: vertical;
+    width: 90%;
     padding: 8px;
     min-height: 40px;
     border: none;
+    position: relative;
+    top: -20px;
+    transition: 0s;
+}
+.card .cardBody .subItem .subItemBody .active {
+  top: 0;
 }
 .card .cardBody .subItem .active {
-    width: auto;
+    width: 95%;
     height: auto;
     opacity: 1;
     z-index: 1;
+    position: relative;
 }
 /* CALENDÁRIO */
 .calendar {

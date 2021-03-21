@@ -54,7 +54,7 @@
 }
 .newCard form button {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     padding: 10px;
     border-radius: 10px;
     border: none;
