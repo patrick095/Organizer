@@ -5,7 +5,7 @@ import editButton from '../../../../assets/buttons/edit.png';
  function Card(props){
      const {obj, i, receivedAllObjects, setAllObjects2} = props
     const [allObjects, setAllObjects] = useState(receivedAllObjects)
-    const [buttonOption, setButtonOption] = useState([""])
+    const [buttonOption, setButtonOption] = useState(defaultButtonOptionsValue(receivedAllObjects))
     const [subItemActive,setSubItemActive ] = useState(defaultSubItemValue()) 
 
     function defaultSubItemValue(){
@@ -14,10 +14,19 @@ import editButton from '../../../../assets/buttons/edit.png';
             array.push([])
             obj.body.map((o) =>{
                 array[i].push([])
+                return array
             })
+            return array
         })
         return array
     }    
+    function defaultButtonOptionsValue(array){
+        let newArray = []
+        array.map(()=>{
+            return newArray.push("")
+        })
+        return newArray
+    }
 
     function removeCard(index){
         allObjects.splice(index, 1)

@@ -5,8 +5,18 @@ function CalendarM(props){
     const {obj, index, receivedAllObjects, setAllObjects2} = props
 
     const [allObjects, setAllObjects] = useState(receivedAllObjects)
-    const [buttonOption, setButtonOption] = useState([""])
+    const [buttonOption, setButtonOption] = useState(defaultButtonOptionsValue(receivedAllObjects))
     const [valueCalendar, onChangeCalendar] = useState(new Date());
+
+    function defaultButtonOptionsValue(array){
+        let newArray = []
+        array.map(()=>{
+            return newArray.push("")
+        })
+        return newArray
+    }
+
+    
     let bodyToShow = false
     
     if (obj.body.length < 1) {

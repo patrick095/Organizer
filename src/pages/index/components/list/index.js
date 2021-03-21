@@ -4,7 +4,15 @@ import React, {useState} from 'react';
 function List(props){
     const {obj, i, receivedAllObjects, setAllObjects2} = props
     const [allObjects, setAllObjects] = useState(receivedAllObjects)
-    const [buttonOption, setButtonOption] = useState([])
+    const [buttonOption, setButtonOption] = useState(defaultButtonOptionsValue(receivedAllObjects))
+
+    function defaultButtonOptionsValue(array){
+        let newArray = []
+        array.map(()=>{
+            return newArray.push("")
+        })
+        return newArray
+    }
 
     function removeCard(index){
         allObjects.splice(index, 1)
