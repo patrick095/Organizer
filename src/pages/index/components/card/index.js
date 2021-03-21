@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 import editButton from '../../../../assets/buttons/edit.png';
 
  function Card(props){
-     const {obj, i, receivedAllObjects} = props
-    const [allObjects, setAllObjects] = useState(receivedAllObjects)
+     const {obj, i, receivedAllObjects, setAllObjects} = props
+    const [allObjects, setAllObjects2] = useState(receivedAllObjects)
     const [buttonOption, setButtonOption] = useState([""])
     const [subItemActive,setSubItemActive ] = useState(defaultSubItemValue()) 
 

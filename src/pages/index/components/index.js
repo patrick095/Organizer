@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styled from "@emotion/styled";
 
@@ -9,12 +9,10 @@ import List from './list';
 
 function DraggableDiv(props) {
     // -------------------
-      var initial = [
-        {id: "id-0", content: "Quote 0", type: "card"},
-        {id: "id-1", content: "Quote 1", type: "card"},
-        {id: "id-2", content: "Quote 2", type: "card"}
-      ]
       const [state, setState] = useState({ quotes: props.allObjects });
+      useEffect(()=>{
+        setState({ quotes: props.allObjects })
+      },[props.allObjects])
       
       const grid = 8;
       const reorder = (list, startIndex, endIndex) => {
@@ -37,6 +35,7 @@ function DraggableDiv(props) {
         function typeToShow(provided){
             if (quote.type === "card") {
                 return (<QuoteItem
+                    key={"card"+index}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -45,11 +44,13 @@ function DraggableDiv(props) {
                     obj={quote}
                     i={index}
                     receivedAllObjects={props.allObjects}
+                    setAllObjects={props.setAllObjects}
                     />
                 </QuoteItem>)
             }
             else if (quote.type === "calendarM") {
                 return (<QuoteItem
+                  key={"calendarM"+index}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -58,11 +59,13 @@ function DraggableDiv(props) {
                     obj={quote}
                     index={index}
                     receivedAllObjects={props.allObjects}
+                    setAllObjects={props.setAllObjects}
                     />
                 </QuoteItem>)
             }
             else if (quote.type === "list") {
                 return (<QuoteItem
+                  key={"list"+index}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -71,6 +74,7 @@ function DraggableDiv(props) {
                     obj={quote}
                     i={index}
                     receivedAllObjects={props.allObjects}
+                    setAllObjects={props.setAllObjects}
                     />
                 </QuoteItem>)
             }

@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import Calendar from 'react-calendar';
 
 function CalendarM(props){
-    const {obj, index, receivedAllObjects} = props
+    const {obj, index, receivedAllObjects, setAllObjects} = props
 
-    const [allObjects, setAllObjects] = useState(receivedAllObjects)
+    const [allObjects, setAllObjects2] = useState(receivedAllObjects)
     const [buttonOption, setButtonOption] = useState([""])
     const [valueCalendar, onChangeCalendar] = useState(new Date());
     let bodyToShow = false

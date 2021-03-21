@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 
 
 function List(props){
-    const {obj, i, receivedAllObjects} = props
-    const [allObjects, setAllObjects] = useState(receivedAllObjects)
+    const {obj, i, receivedAllObjects, setAllObjects} = props
+    const [allObjects, setAllObjects2] = useState(receivedAllObjects)
     const [buttonOption, setButtonOption] = useState([])
 
     function removeCard(index){

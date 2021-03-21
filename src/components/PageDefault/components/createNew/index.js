@@ -5,13 +5,13 @@ import "./styles.css"
 function CreateNew(props) {
     const [options, setOptions] = useState('')
     const [select, setSelect] = useState('')
-    const [newItem, setNewItem] = useState({title: "", type:'', body:[]})
+    const [newItem, setNewItem] = useState({id:"",title: "", type:'', body:[]})
     const [dataFunc, setAllObjects] = props.setFunc
 
     useEffect(()=>{
-        setNewItem({...newItem,type: select})
-        
-        if (select === "Selecione um tipo") {
+        setNewItem({...newItem,type: select, id: Math.random().toString()})
+        console.log(select)
+        if (select === "Selecione um tipo" || select === "") {
             setOptions(<div></div>)
         }
         else {

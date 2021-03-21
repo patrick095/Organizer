@@ -238,7 +238,7 @@ function Index() {
                             </div>
                         )
                     })} */}
-                    <DraggableDiv allObjects={allObjects}/>
+                    <DraggableDiv allObjects={allObjects} setAllObjects={setAllObjects} />
                 </div>
         </PageDefault>
     )
