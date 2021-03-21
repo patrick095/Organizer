@@ -5,16 +5,18 @@ import PageDefault from '../../components/PageDefault';
 import editButton from '../../assets/buttons/edit.png';
 
 import "./styles.css"
+import DraggableDiv from './components';
 
 function Index() {
     const [allObjects, setAllObjects] = useState([
-        {type: "card",title: "Novo Card", body: [{title:"Novo Item", body:"Aqui um pequeno texto do corpo do item"}]},
-        {type: "calendarM", title: "Meu novo Calendário", body: []},
-        {type: "list", title:"Nova Lista", body: [{title:"tarefa 1", checked: true}, {title:"tarefa 2", checked: false}]}
+        {id: "0", type: "card",title: "Novo Card", body: [{title:"Novo Item", body:"Aqui um pequeno texto do corpo do item"}]},
+        {id: "1", type: "calendarM", title: "Meu novo Calendário", body: []},
+        {id: "2", type: "list", title:"Nova Lista", body: [{title:"tarefa 1", checked: true}, {title:"tarefa 2", checked: false}]}
     ])
     const [buttonOption, setButtonOption] = useState([])
     const [subItemActive,setSubItemActive ] = useState(defaultSubItemValue())
     const [valueCalendar, onChangeCalendar] = useState(new Date());
+   
     //use Effect cria todas as opções dos botões de acordo com o que está em allObjects
     useEffect(() =>{
         allObjects.map((obj,i) =>{
@@ -38,7 +40,7 @@ function Index() {
             })
         })
         return array
-    }
+    }    
 
     //modelos de objetos
     //CARD
@@ -215,7 +217,7 @@ function Index() {
         <PageDefault setFunc={[allObjects, setAllObjects]} >
                 <h1 className="h1Background">Organizador</h1>
                 <div className="mainApp">
-                    {allObjects.map((obj, i) =>{
+                    {/* {allObjects.map((obj, i) =>{
                         let o
                         if (obj.type === "card") {
                             o = objectCard(obj, i)
@@ -235,7 +237,8 @@ function Index() {
                             {o}
                             </div>
                         )
-                    })}
+                    })} */}
+                    <DraggableDiv allObjects={allObjects}/>
                 </div>
         </PageDefault>
     )
