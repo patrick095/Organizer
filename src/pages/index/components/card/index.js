@@ -128,7 +128,7 @@ import editButton from '../../../../assets/buttons/edit.png';
                         <div className="subItem" key={" - "+ii}>
                             <div>
                                 <input type="text" placeholder="Novo Item" onKeyDown={saveTitle} value={subObj.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
-                                <button onClick={() => buttonSubItem(i,ii)}><img src={editButton} alt="editButton" className='editButton' /></button>
+                                <button onClick={() => buttonSubItem(i,ii)} style={{backgroundColor: 'rgba(0, 0, 0, 0)'}}><img src={editButton} alt="editButton" className='editButton' /></button>
                                 <button className="deleteButton" onClick={()=>deleteSubItem(i,ii)}> x </button>
                             </div>
                             <div className={'subItemBody '+subItemActive[i][ii]}>
