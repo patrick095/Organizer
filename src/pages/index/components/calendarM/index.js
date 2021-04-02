@@ -27,7 +27,7 @@ function CalendarM(props){
                 if (obj.date === valueCalendar.toISOString().slice(0, 10)) {
                     return (
                         <div className="dayItem" key={"dayItem"+ii}>
-                        <input value={obj.title} placeholder="Novo Item" onChange={(e)=>handleChangeSubTitle(e,ii)} />
+                        <input value={obj.title} placeholder="Novo Item" onKeyDown={saveTitle} onChange={(e)=>handleChangeSubTitle(e,ii)} />
                         <button className="deleteButton" onClick={()=>deleteSubItem(ii)}> Remover </button>
                         </div>
                     )
@@ -41,7 +41,7 @@ function CalendarM(props){
     function addSubItemCalendar(date){
         let shortDate = date.toISOString().slice(0, 10)
         obj.body.push({title:'', date: shortDate})
-        setObj({...obj})
+        setAllObjects([...allObjects])
     }
     function removeCard(index){
         allObjects.splice(index, 1)
@@ -65,16 +65,31 @@ function CalendarM(props){
     }
     function deleteSubItem(index2){
         obj.body.splice(index2, 1)
-        setObj({...obj})
+        setAllObjects([...allObjects])
     }
     function handleChangeSubTitle(e, index2){
         obj.body[index2].title = e.target.value
         setObj({...obj})
     }
+    
+    function saveTitle(e){
+        if (e.key === 'Enter') {
+            saveObj()
+        }
+    }
+    function saveObj(){
+        allObjects.map((Obj,i)=>{
+            if (Obj.id === obj.id) {
+                let newAllObj = allObjects
+                newAllObj.splice(i,1, obj)
+                setAllObjects([...newAllObj])
+            }
+        })
+    }
         return (
             <div className="calendar">
                 <div className="calendarHeader">
-                <input type="text" placeholder="Título"  value={obj.title} onChange={(e)=>changeTitle(e.target.value)}/>
+                <input type="text" placeholder="Título" onKeyDown={saveTitle} value={obj.title} onChange={(e)=>changeTitle(e.target.value)}/>
                 <button onClick={() => handlebuttonOption(index)} className="cardOptionsButton">...</button>
                 <div className={'cardOptions '+ buttonOption[index]}>
                         <button onClick={()=> removeCard(index)}>Apagar</button>

@@ -36,25 +36,41 @@ function List(props){
     }
     function handleCheckBox(index1, index2){
             obj.body[index2].checked = !obj.body[index2].checked
-            setObj({...obj})
+        setAllObjects([...allObjects])
         
     }
     function deleteSubItem(index1, index2){
         obj.body.splice(index2, 1)
-        setObj({...obj})
+        setAllObjects([...allObjects])
     }
     function addSubItem(index1){
         obj.body.push({title:'', body:''})
-        setObj({...obj})
+        setAllObjects([...allObjects])
     }
     function handleChangeSubTitle(e, index1, index2){
         obj.body[index2].title = e.target.value
         setObj({...obj})
     }
+
+    
+    function saveTitle(e){
+        if (e.key === 'Enter') {
+            saveObj()
+        }
+    }
+    function saveObj(){
+        allObjects.map((Obj,i)=>{
+            if (Obj.id === obj.id) {
+                let newAllObj = allObjects
+                newAllObj.splice(i,1, obj)
+                setAllObjects([...newAllObj])
+            }
+        })
+    }
     return (
         <div className="card" key={"list"+i}>
             <div className="cardTitle">
-            <input type="text" value={obj.title} placeholder="Título"  onChange={(e) => changeTitle(i, e.target.value)}/>
+            <input type="text" value={obj.title} placeholder="Título" onKeyDown={saveTitle} onChange={(e) => changeTitle(i, e.target.value)}/>
             <button onClick={() => handlebuttonOption(i)} className="cardOptionsButton">...</button>
             <div className={'cardOptions '+ buttonOption[i]}>
                     <button onClick={()=> removeCard(i)}>Apagar</button>
@@ -66,7 +82,7 @@ function List(props){
                         obj.body.map((objList, ii) =>{
                             return (
                                 <li className="listItem" key={" - "+ii}>
-                                        <input type="text" placeholder="Novo Item" value={objList.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
+                                        <input type="text" placeholder="Novo Item" value={objList.title} onKeyDown={saveTitle} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
                                         <input type="checkbox" checked={objList.checked} onChange={() => handleCheckBox(i,ii)} />
                                         <button className="deleteButton" onClick={()=>deleteSubItem(i,ii)}> x </button>
                                 </li>

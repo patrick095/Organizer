@@ -8,13 +8,14 @@ import CalendarM from './calendarM';
 import List from './list';
 
 function DraggableDiv(props) {
-    const [allObjects, setAllObjects] = props.children
+    const [allObjects, setAllObjects, updateDB] = props.children
       const [state, setState] = useState({ quotes: allObjects });
       useEffect(()=>{
         setState({ quotes: allObjects })
       },[allObjects])
       
       const grid = 8;
+
       const reorder = (list, startIndex, endIndex) => {
         const result = Array.from(list);
         const [removed] = result.splice(startIndex, 1);
@@ -22,11 +23,12 @@ function DraggableDiv(props) {
       
         return result;
       };
+
       
       const QuoteItem = styled.div`
         user-selectet: none;
         min-width: 220px;
-        height: 100px;
+        min-height: 100px;
         margin: 10px;
         margin-bottom: ${grid}px;
       `;
@@ -39,6 +41,7 @@ function DraggableDiv(props) {
                 i={index}
                 allObjects={allObjects}
                 setAllObjects={setAllObjects}
+                updateDB={updateDB}
                 />)
         }
         else if (quote.type === "calendarM") {
@@ -48,6 +51,7 @@ function DraggableDiv(props) {
                 index={index}
                 allObjects={allObjects}
                 setAllObjects={setAllObjects}
+                updateDB={updateDB}
                 />)
         }
         else if (quote.type === "list") {
@@ -57,6 +61,7 @@ function DraggableDiv(props) {
                 i={index}
                 allObjects={allObjects}
                 setAllObjects={setAllObjects}
+                updateDB={updateDB}
                 />)
         }
         else {
@@ -66,13 +71,14 @@ function DraggableDiv(props) {
                 i={index}
                 receivedAllObjects={allObjects}
                 setAllObjects2={setAllObjects}
+                updateDB={updateDB}
                 />)
         }
       } 
       
       function Quote({ quote, index }) {
         return (
-          <Draggable draggableId={"id"+index} index={index}>
+          <Draggable draggableId={"id"+index} index={index} >
             {provided => (
             <QuoteItem
                     key={"card"+index}

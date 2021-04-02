@@ -54,6 +54,20 @@ import editButton from '../../../../assets/buttons/edit.png';
         obj.title = title
         setObj({...obj})
     }
+    function saveTitle(e){
+        if (e.key === 'Enter') {
+            saveObj()
+        }
+    }
+    function saveObj(){
+        allObjects.map((Obj,i)=>{
+            if (Obj.id === obj.id) {
+                let newAllObj = allObjects
+                newAllObj.splice(i,1, obj)
+                setAllObjects([...newAllObj])
+            }
+        })
+    }
 
     function handlebuttonOption(index){
         if (buttonOption[index] === '') {
@@ -79,13 +93,13 @@ import editButton from '../../../../assets/buttons/edit.png';
 
     function deleteSubItem(index1, index2){
         obj.body.splice(index2, 1)
-        setObj({...obj})
+        setAllObjects([...allObjects])
         updateSubItemActive()
     }
 
     function addSubItem(index1){
         obj.body.push({title:'', body:''})
-        setObj({...obj})
+        setAllObjects([...allObjects])
         updateSubItemActive()
     }
 
@@ -102,7 +116,7 @@ import editButton from '../../../../assets/buttons/edit.png';
     return (
         <div className="card" key={"card"+i}>
             <div className="cardTitle">
-            <input type="text" value={obj.title} placeholder="Título"  onChange={(e) => changeTitle(i, e.target.value)}/>
+            <input type="text" value={obj.title} placeholder="Título" onKeyDown={saveTitle} onChange={(e) => changeTitle(i, e.target.value)}/>
             <button onClick={() => handlebuttonOption(i)} className="cardOptionsButton">...</button>
             <div className={'cardOptions '+ buttonOption[i]}>
                     <button onClick={()=> removeCard(i)}>Apagar</button>
@@ -113,7 +127,7 @@ import editButton from '../../../../assets/buttons/edit.png';
                     return (
                         <div className="subItem" key={" - "+ii}>
                             <div>
-                                <input type="text" placeholder="Novo Item"  value={subObj.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
+                                <input type="text" placeholder="Novo Item" onKeyDown={saveTitle} value={subObj.title} onChange={(e)=>{handleChangeSubTitle(e,i,ii)}} />
                                 <button onClick={() => buttonSubItem(i,ii)}><img src={editButton} alt="editButton" className='editButton' /></button>
                                 <button className="deleteButton" onClick={()=>deleteSubItem(i,ii)}> x </button>
                             </div>
