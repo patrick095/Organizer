@@ -19,7 +19,7 @@ function CalendarM(props){
     let bodyToShow = false
     
     if (obj.body.length < 1) {
-        bodyToShow = (<div className="dayItem" key="Nada"><span>Nada salvo hoje</span></div>)
+        bodyToShow = (<div className="dayItem" key="Nada"><span style={{color:"var(--primary-item-font-color)"}}>Nada salvo hoje</span></div>)
     }
     else {
         bodyToShow = (

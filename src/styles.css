@@ -2,3 +2,10 @@
     margin:0;
     padding:0;  
 }
+:root {
+        --primary-item-bg-color: #4266b9;
+        --secundary-item-bg-color: #ffffff;
+        --primary-item-font-color: #ffffff;
+        outline: 0;
+        transition: 0.5s;
+}

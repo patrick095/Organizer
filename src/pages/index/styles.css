@@ -1,9 +1,3 @@
-* {
-    --primary-item-bg-color: rgb(66, 102, 185);
-    --primary-item-font-color: white;
-    outline: 0;
-    transition: 0.5s;
-}
 .h1Background {
  color: white;
  position: absolute;
@@ -114,7 +108,7 @@
 .card .cardBody .subItem{
 width: 95%;
 min-height: 40px;
-background-color: var(--primary-item-font-color);
+background-color: var(--secundary-item-bg-color);
 border-radius: 5px;
 display: flex;
 flex-direction: column;

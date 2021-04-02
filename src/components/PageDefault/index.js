@@ -4,8 +4,10 @@ import Navbar from '../navbar';
 import "./styles.css"
 import configButton from '../../assets/buttons/config.png'
 import addButton from '../../assets/buttons/add.png'
+import profileButton from '../../assets/buttons/profile.png'
 import CreateNew from './components/createNew';
 import Settings from './components/settings';
+import Profile from './components/profile';
 
 function PageDefault(props) {
     const empityDiv = ""
@@ -36,6 +38,9 @@ function PageDefault(props) {
                 </li>
                 <li className="button">
                     <button className="config" onClick={() => {handleComponent(<Settings >{setComponent}</Settings>, 2)}}><img className="imgrotate" src={configButton} alt="configButton" /></button>
+                </li>
+                <li className="button">
+                <button className="profile" onClick={() => {handleComponent(<Profile >{setComponent}</Profile>, 3)}}><img src={profileButton} alt="profileButton" /></button>
                 </li>
                 </Navbar>
         </div>
