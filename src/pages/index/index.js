@@ -21,8 +21,20 @@ function Index() {
     },[])
     function verifyUser(){
         Api.post('/verifyuser', userInfo).then(res =>{
+            console.log(res.data.user)
             setUser(res.data.user)
             setAllObjects(res.data.user.data)
+            localStorage.setItem('user_info', JSON.stringify({
+                logged: true,
+                user: res.data.user.user,
+                name: res.data.user.name,
+                email: res.data.user.email,
+                token: res.data.token,
+                _id: res.data.user._id,
+                theme: res.data.user.theme
+            }))
+        document.documentElement.style.setProperty('--primary-item-bg-color', res.data.user.theme.bgColor);
+        document.documentElement.style.setProperty('--primary-item-font-color', res.data.user.theme.fontColor);
         }).catch(err =>{
             setRedirect(<Redirect to="login" />)
         })
@@ -36,7 +48,7 @@ function Index() {
             console.log("carregamento inicial")
         }
         else if (allObjects !== user.data && user.user !== '') {
-            console.log("salvar!")
+            console.log(allObjects)
             Api.post("/auth/updatedata?api=Bearer "+userInfo.token, {_id: user._id, data: allObjects}).then(res =>{
                 console.log(res.data.response.data)
             }).catch(err =>{

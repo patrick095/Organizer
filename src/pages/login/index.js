@@ -11,6 +11,10 @@ function Login() {
     function signIn(e){
         e.preventDefault()
         Api.post('/signin', userLogin).then((res)=>{
+            console.log(res.data)
+            if (res.data == "invalid username or password") {
+                alert("login ou senha inválidos!")
+            }
             const {  user, token } = res.data
             localStorage.setItem('user_info', JSON.stringify({
                 logged: true,
@@ -18,7 +22,8 @@ function Login() {
                 name: user.name,
                 email: user.email,
                 token: token,
-                _id: user._id
+                _id: user._id,
+                theme: user.theme
             }))
             setRedirect(<Redirect to="/" />)
         }).catch((err) =>{
@@ -37,7 +42,9 @@ function Login() {
                 user: user,
                 name: name,
                 email: email,
-                token: token
+                token: token,
+                _id: user._id,
+                theme: user.theme
             }))
             setRedirect(<Redirect to="/" />)
         }).catch((err) =>{
