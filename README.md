@@ -12,5 +12,10 @@ Link do projeto publicado na Vercel:
 https://organizer-sooty.vercel.app/
 
 Usuário para testes
+
 usuário: teste
+
 senha: teste
+
+
+Api está hospedada no heroku, então aguarde alguns segundos ao acessar pela primeira vez.
